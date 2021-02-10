@@ -1,7 +1,12 @@
 <template>
-  <section v-if="isAlternatingTuesday">
+  <section v-if="isAlternatingTuesday.status || manualShow.status">
     <div class="max-w-2xl mx-auto text-center pb-8 px-4 sm:pb-10 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">Yes, he is!</h2>
+      <h2
+        class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
+        @click="state.count++"
+      >
+        Yes, he is!
+      </h2>
     </div>
     <picture class="flex justify-center">
       <source srcset="../assets/reginald.jpg">
@@ -10,7 +15,12 @@
   </section>
   <section v-else>
     <div class="max-w-3xl mx-auto text-center pb-8 px-4 sm:pb-10 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">No, unfortunately he is not.</h2>
+      <h2
+        class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
+        @click="state.count++"
+      >
+        No, unfortunately he is not.
+      </h2>
     </div>
     <div class="max-w-3xl mx-auto text-center pt-8 px-4 sm:pt-10 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">He will be back in <countdown :nextDate="nextDate" />.</h2>
@@ -19,6 +29,7 @@
 </template>
 
 <script setup>
+  import { reactive, watch } from 'vue'
   import Countdown from './Countdown.vue'
 
   const getWeeksBetween = (d1, d2) => Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000))
@@ -31,7 +42,7 @@
     return isTuesday && isAlternatingWeek
   }
 
-  const isAlternatingTuesday = isDateAlternatingTuesday(new Date())
+  const isAlternatingTuesday = reactive({ status: isDateAlternatingTuesday(new Date()) })
 
   const getNextAlternatingTuesday = () => {
     const currentDate = new Date()
@@ -50,4 +61,14 @@
   }
 
   const nextDate = getNextAlternatingTuesday()
+
+  let manualShow = reactive({ status: false })
+  const state = reactive({ count: 0 })
+  watch(() => state.count, count => {
+    if (count === 5) {
+      manualShow.status = !manualShow.status
+      state.count = 0
+      console.log('toggled!')
+    }
+  })
 </script>
