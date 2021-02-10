@@ -1,8 +1,8 @@
 <template>
   <section v-if="isAlternatingTuesday.status || manualShow.status" class="flex-1">
-    <div class="max-w-2xl mx-auto text-center pb-8 px-4 sm:pb-10 sm:px-6 lg:px-8">
+    <div class="mx-auto text-center pb-8 px-4 sm:pb-10 sm:px-6 lg:px-8">
       <h2
-        class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
+        class="font-extrabold text-gray-900 dark:text-white sm:text-4xl"
         @click="state.count++"
       >
         Yes, he is!
