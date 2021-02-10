@@ -40,13 +40,24 @@
 </template>
 
 <script setup>
-  import { reactive } from 'vue'
+  import { reactive, watch } from 'vue'
 
-  const toggleState = reactive({ dark: localStorage.theme === 'dark' })
+  const toggleState = reactive({ dark: localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) })
+
+  const state = reactive({ count: 0 })
+  watch(() => state.count, count => {
+    if (count === 5) {
+      state.count = 0
+      localStorage.removeItem('theme')
+      setTimeout(() => state.count = 0, 5000)
+      console.log('theme unset!')
+    }
+  })
 
   const handleToggle = () => {
-    localStorage.theme = toggleState.dark ? 'light': 'dark'
+    localStorage.theme = toggleState.dark ? 'light' : 'dark'
     toggleState.dark ? document.documentElement.classList.remove('dark') : document.documentElement.classList.add('dark')
     toggleState.dark = !toggleState.dark
+    state.count++
   }
 </script>
