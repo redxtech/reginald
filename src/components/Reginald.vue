@@ -20,16 +20,34 @@
 
 <script setup>
   import Countdown from './Countdown.vue'
+
   const getWeeksBetween = (d1, d2) => Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000))
 
-  const originDate = new Date('January 22 2019')
-  const currentDate = new Date()
-  const weeksBetween = getWeeksBetween(originDate, currentDate)
+  const isDateAlternatingTuesday = date => {
+    const originDate = new Date('January 22 2019')
+    const weeksBetween = getWeeksBetween(originDate, date)
+    const isTuesday = date.getDay() === 2
+    const isAlternatingWeek = weeksBetween % 2 === 0
+    return isTuesday && isAlternatingWeek
+  }
 
-  const isTuesday = currentDate.getDay() === 2
-  const isAlternatingWeek = weeksBetween % 2 === 0
-  const isAlternatingTuesday = isTuesday && isAlternatingWeek
+  const isAlternatingTuesday = isDateAlternatingTuesday(new Date())
 
-  const nextDate = new Date()
-  nextDate.setDate(nextDate.getDate() + 7)
+  const getNextAlternatingTuesday = () => {
+    const currentDate = new Date()
+    const dayOfWeek = currentDate.getDay()
+    const nextDate = new Date()
+     if (dayOfWeek < 2) {
+      nextDate.setDate(nextDate.getDate() + (2 - dayOfWeek))
+    } else {
+      nextDate.setDate(nextDate.getDate() + (9 - dayOfWeek))
+    }
+    if (!isDateAlternatingTuesday(nextDate)) {
+      nextDate.setDate(nextDate.getDate() + 7)
+    }
+
+    return new Date(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate())
+  }
+
+  const nextDate = getNextAlternatingTuesday()
 </script>

@@ -7,7 +7,7 @@
     name: 'Countdown',
     props: {
       nextDate: {
-        type: String,
+        type: Date,
         required: true
       }
     },
