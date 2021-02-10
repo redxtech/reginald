@@ -1,4 +1,16 @@
 <template>
+  <section v-if="isAlternatingTuesday || true">
+    <div class="max-w-2xl mx-auto text-center pb-8 px-4 sm:pb-10 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">Yes, he is!</h2>
+    </div>
+    <picture class="flex justify-center">
+      <source srcset="../assets/reginald.jpg">
+      <img src="../assets/reginald.jpg" alt="This is Reginald. Everybody say 'Hi Reginald'">
+    </picture>
+  </section>
+  <section v-else>
+
+  </section>
   <h1>Reginald is {{ isAlternatingTuesday ? '': 'not ' }}here :{{ isAlternatingTuesday ? ')': '(' }}</h1>
 
   <p><button @click="toDarkMode">dark mode</button></p>
