@@ -1,5 +1,5 @@
 <template>
-  <section v-if="isAlternatingTuesday.status || manualShow.status">
+  <section v-if="isAlternatingTuesday.status || manualShow.status" class="flex-1">
     <div class="max-w-2xl mx-auto text-center pb-8 px-4 sm:pb-10 sm:px-6 lg:px-8">
       <h2
         class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
@@ -13,7 +13,7 @@
       <img src="../assets/reginald.jpg" alt="This is Reginald. Everybody say 'Hi Reginald'">
     </picture>
   </section>
-  <section v-else>
+  <section v-else class="flex-1">
     <div class="max-w-3xl mx-auto text-center pb-8 px-4 sm:pb-10 sm:px-6 lg:px-8">
       <h2
         class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
