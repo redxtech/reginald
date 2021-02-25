@@ -8,7 +8,7 @@
         Yes, he is!
       </h2>
     </div>
-    <picture class="flex justify-center">
+    <picture class="flex justify-center reginald">
       <source srcset="../assets/reginald.jpg">
       <img src="../assets/reginald.jpg" alt="This is Reginald. Everybody say 'Hi Reginald'">
     </picture>
@@ -72,3 +72,10 @@
     }
   })
 </script>
+
+<style scoped>
+  .reginald img {
+    width: 100%;
+    height: auto;
+  }
+</style>
